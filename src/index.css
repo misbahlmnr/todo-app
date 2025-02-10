@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+.form-input {
+  @apply w-full px-3 py-1.5 bg-slate-100 rounded-lg focus:outline-blue-500;
+}
+.form-control {
+  @apply flex flex-col gap-2 mb-2;
+}
+.btn-action {
+  @apply p-1 rounded-lg cursor-pointer transition-all duration-300 ease-in-out text-slate-500;
+}

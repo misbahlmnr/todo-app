@@ -1,0 +1,25 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ddd;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 10px;
+}
