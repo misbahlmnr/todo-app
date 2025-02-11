@@ -12,6 +12,8 @@ export default defineConfig({
         hello_world: 'hello-world.html',
         contact: 'contact.html',
         note: 'note.html',
+        profile: 'profile.html',
+        timer: 'timer.html',
       },
     },
   },
