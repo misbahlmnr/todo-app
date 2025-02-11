@@ -11,6 +11,7 @@ export default defineConfig({
         index: 'index.html',
         hello_world: 'hello-world.html',
         contact: 'contact.html',
+        note: 'note.html',
       },
     },
   },
