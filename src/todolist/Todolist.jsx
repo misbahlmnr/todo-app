@@ -5,9 +5,9 @@ export default function Todolist(props) {
   return (
     <ul className="flex flex-col gap-5 h-full">
       {todos && todos.length > 0 ? (
-        todos.map((todo) => (
+        todos.map((todo, idx) => (
           <Todo
-            key={todo.id}
+            key={idx}
             todo={todo}
             deleteTodo={deleteTodo}
             handleEdit={handleEdit}

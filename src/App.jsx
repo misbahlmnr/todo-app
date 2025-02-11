@@ -6,6 +6,7 @@ import {
   useDeleteTodo,
   useUpdateTodo,
 } from './libs/Todos/mutation/';
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   const [formTodo, setFormTodo] = useState({
@@ -19,6 +20,14 @@ function App() {
   const { mutate: createTodo } = useCreateTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
   const { mutate: updateTodo } = useUpdateTodo();
+
+  const resetForm = () => {
+    setFormTodo({
+      todo: '',
+      description: '',
+      status: false,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,29 +45,28 @@ function App() {
         {
           onSuccess: () => {
             setEditedTodo(null);
-            setFormTodo({
-              todo: '',
-              description: '',
-              status: false,
-            });
+            toast.success('Todo berhasil diedit');
           },
         }
       );
     } else {
-      createTodo({
-        title: formTodo.todo,
-        description: formTodo.description,
-        completed: formTodo.status ? 1 : 0,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      });
+      createTodo(
+        {
+          title: formTodo.todo,
+          description: formTodo.description,
+          completed: formTodo.status ? 1 : 0,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          onSuccess: () => {
+            toast.success('Todo berhasil ditambahkan');
+          },
+        }
+      );
     }
 
-    setFormTodo({
-      todo: '',
-      description: '',
-      status: false,
-    });
+    resetForm();
   };
 
   const handleEdit = (todo) => {
@@ -68,6 +76,20 @@ function App() {
       status: Boolean(todo.completed),
     });
     setEditedTodo(todo);
+  };
+
+  const handleDelete = (todoId) => {
+    const confirm = window.confirm(
+      'Apakah anda yakin ingin menghapus todo ini?'
+    );
+
+    if (confirm) {
+      deleteTodo(todoId, {
+        onSuccess: () => {
+          toast.success('Todo berhasil dihapus');
+        },
+      });
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -135,11 +157,7 @@ function App() {
                   className="flex items-center justify-center flex-1 bg-slate-200 text-slate-700 px-4 py-2 rounded-lg"
                   onClick={() => {
                     setEditedTodo(null);
-                    setFormTodo({
-                      todo: '',
-                      description: '',
-                      status: false,
-                    });
+                    resetForm();
                   }}
                 >
                   Batal
@@ -165,11 +183,13 @@ function App() {
         <div className="mt-5 h-[400px] overflow-y-auto">
           <Todolist
             todos={dataTodo?.data}
-            deleteTodo={deleteTodo}
+            deleteTodo={handleDelete}
             handleEdit={handleEdit}
           />
         </div>
       </div>
+
+      <Toaster />
     </div>
   );
 }
