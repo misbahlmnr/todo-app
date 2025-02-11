@@ -95,8 +95,8 @@ function App() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="w-full bg-slate-100 h-screen flex items-center justify-center">
-      <div className="bg-white rounded-lg p-6 max-w-xl w-full h-[80vh] shadow-lg">
+    <div className="w-full bg-slate-100 h-screen flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl p-6 lg:max-w-xl max-w-full w-full h-[80vh] shadow-lg flex flex-col">
         <h1 className="text-center text-3xl font-semibold text-slate-600">
           Todo App
         </h1>
@@ -180,7 +180,7 @@ function App() {
           </div>
         </form>
 
-        <div className="mt-5 h-[400px] overflow-y-auto">
+        <div className="mt-5 overflow-y-auto">
           <Todolist
             todos={dataTodo?.data}
             deleteTodo={handleDelete}
